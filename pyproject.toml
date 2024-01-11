@@ -1,0 +1,22 @@
+[project]
+name = "rpn-calculator"
+version = "0.1.0"
+description = "Add your description here"
+authors = [{ name = "shaade", email = "s.shaade77@gmail.com" }]
+dependencies = ["fastapi[all]>=0.108.0", "uvicorn>=0.25.0", "pydantic>=2.5.3"]
+readme = "README.md"
+requires-python = ">= 3.8"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.rye]
+managed = true
+dev-dependencies = []
+
+[tool.rye.scripts]
+dev = "uvicorn main:app --reload"
+
+[tool.hatch.metadata]
+allow-direct-references = true
