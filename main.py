@@ -33,6 +33,6 @@ async def root(body: Body):
         { "expression": "3 4 + 5 *", "result": 35 }
     """
     return {
-        "expression": body.expr,
-        "result": calculate(body.expr),
+        "expression": body.expression,
+        "result": calculate(body.expression),
     }
