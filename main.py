@@ -1,5 +1,6 @@
 from fastapi import FastAPI
 from pydantic import BaseModel
+from fastapi.staticfiles import StaticFiles
 
 from utils import calculate
 
@@ -7,6 +8,8 @@ app = FastAPI(
     title="RPN Calculator",
     description="A simple RPN calculator",
 )
+
+app.mount("/", StaticFiles(directory="resources/dist", html=True), name="static")
 
 
 class Body(BaseModel):
