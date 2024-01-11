@@ -30,6 +30,19 @@ def test_complex_expression_3():
     assert calculate("3 4 + 5 6 - *") == -7
 
 
+def test_float_values():
+    assert calculate("3.14 2.72 +") == pytest.approx(5.86)
+
+
+def test_exponentiation():
+    assert calculate("3 4 ^") == 81
+
+
+def test_division_by_zero():
+    with pytest.raises(ZeroDivisionError):
+        calculate("3 0 /")
+
+
 def test_not_enough_operands():
     with pytest.raises(ValueError, match="Error: Not enough operands in the expression."):
         calculate("3 +")
