@@ -10,7 +10,7 @@ app = FastAPI(
 
 
 class Body(BaseModel):
-    expr: str
+    expression: str
 
 
 @app.post("/")
@@ -27,7 +27,7 @@ async def root(body: Body):
     **Example**:
 
         Request:
-        { "expr": "3 4 + 5 *" }
+        { "expression": "3 4 + 5 *" }
 
         Response:
         { "expression": "3 4 + 5 *", "result": 35 }
