@@ -20,20 +20,25 @@ def is_numeric_literal(token):
 
 def calculate(expression):
     tokens = expression.split()
-    result = []
+    stack = []
 
     for token in tokens:
         if token in operators:
-            if len(result) < 2:
+            try:
+                operand2 = stack.pop()
+                operand1 = stack.pop()
+            except IndexError:
                 raise ValueError("Error: Not enough operands in the expression.")
-            func = operators[token]
-            result[-2:] = [func(result[-2], result[-1])]
+
+            operation = operators[token]
+            result = operation(operand1, operand2)
+            stack.append(result)
         elif is_numeric_literal(token):
-            result.append(literal_eval(token))
+            stack.append(literal_eval(token))
         else:
             raise ValueError(f"Error: Invalid token '{token}' in the expression.")
 
-    if len(result) > 1:
+    if len(stack) > 1:
         raise ValueError("Error: The expression was not fully evaluated.")
 
-    return result[0] if result else 0
+    return stack.pop() if stack else 0
