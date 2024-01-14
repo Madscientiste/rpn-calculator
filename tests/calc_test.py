@@ -1,5 +1,5 @@
 import pytest
-from utils.calc import calculate
+from app.utils import calculate, CalculatorError
 
 
 def test_addition():
@@ -44,15 +44,18 @@ def test_division_by_zero():
 
 
 def test_not_enough_operands():
-    with pytest.raises(ValueError, match="Error: Not enough operands in the expression."):
+    with pytest.raises(CalculatorError, match="Not enough operands in the expression."):
         calculate("3 +")
 
 
 def test_invalid_token():
-    with pytest.raises(ValueError, match="Error: Invalid token 'a' in the expression."):
+    with pytest.raises(CalculatorError, match="Invalid token 'a' in the expression."):
         calculate("3 a +")
 
 
 def test_expression_not_fully_evaluated():
-    with pytest.raises(ValueError, match="Error: The expression was not fully evaluated."):
+    with pytest.raises(
+        CalculatorError,
+        match="Too many operands. The expression contains more numbers than can be evaluated with the provided operators.",
+    ):
         calculate("3 4 + 5")

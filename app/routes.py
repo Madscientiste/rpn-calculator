@@ -1,30 +1,16 @@
-from starlette.responses import RedirectResponse
-from fastapi import FastAPI, status, HTTPException
+from fastapi import status, HTTPException, APIRouter
 from pydantic import BaseModel
 
-from fastapi.staticfiles import StaticFiles
+from app.utils import calculate, CalculatorError
 
-from utils import calculate, CalculatorError
-
-app = FastAPI(
-    title="RPN Calculator",
-    description="A simple RPN calculator",
-)
-
-
-app.mount("/calculator", StaticFiles(directory="resources/dist", html=True), name="calculator")
+router = APIRouter()
 
 
 class Body(BaseModel):
     expression: str
 
 
-@app.get("/")
-async def redirect():
-    return RedirectResponse(url="/calculator")
-
-
-@app.post("/api/calc")
+@router.post("/calc")
 async def root(body: Body):
     """
     ## Calculate the result of a Reverse Polish Notation (RPN) expression.
