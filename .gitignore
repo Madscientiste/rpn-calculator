@@ -6,5 +6,7 @@ dist/
 wheels/
 *.egg-info
 
+database.sqlite
+
 # venv
 .venv

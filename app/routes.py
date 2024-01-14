@@ -1,7 +1,8 @@
 from fastapi import status, HTTPException, APIRouter
 from pydantic import BaseModel
 
-from app.utils import calculate, CalculatorError
+from .utils import calculate, CalculatorError
+from .models import Operation
 
 router = APIRouter()
 
@@ -31,10 +32,15 @@ async def root(body: Body):
     """
 
     try:
-        return {
+        response = {
             "expression": body.expression,
             "result": calculate(body.expression),
         }
+
+        # Will do the job for now.
+        Operation.create_operation(**response)
+
+        return response
     except Exception as e:
         raise HTTPException(
             detail=str(e),
