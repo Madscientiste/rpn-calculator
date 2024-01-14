@@ -1,34 +1,44 @@
-# RPN Calculator
+# Reverse Łukasiewicz Notation
 
--   Served with [FastAPI](https://fastapi.tiangolo.com/).
--   Tested with [pytest](https://docs.pytest.org/en/stable/).
+Reverse Polish notation, also known as Polish postfix notation or simply postfix notation, is a mathematical notation in which operators follow their operands, in contrast to Polish notation (PN), in which operators precede their operands. It does not need any parentheses as long as each operator has a fixed number of operands.
 
-## Usage
+### Tech Stack
 
-### Run
+-   Python & FastAPI
+-   React & TypeScript
+-   Docker
+
+## Development
+
+I'm using [Rye](https://rye-up.com/), an experimental package management solution created by the author of [Flask](https://flask.palletsprojects.com/en/3.0.x/).
+
+You probably don't have it installed, doing `pip install -r requirements-dev.lock` should be good enough.
+
+#### Running Tests
 
 ```bash
-docker-compose up
+rye run test
+
+# or if you are not using rye
+pytest
 ```
 
-### Test
+#### Running the project
 
 ```bash
-docker-compose run --rm app pytest
+rye run dev
+
+# or if you are not using rye
+uvicorn app:server --reload
 ```
 
-### API Documentation
+Not forgetting to build the frontend
 
-#### POST /
+```bash
+cd resources
 
-**Request Body**:
-
-```json
-{ "expression": "1 2 + 4 * 3 +" }
+npm i && npm run build
 ```
 
-**Response**:
-
-```json
-{ "expression": "1 2 + 4 * 3 +", "result": 15 }
-```
+-   Then the app will be available at [http://localhost:5050](http://localhost:5050).
+-   And the docs will be available at [http://localhost:5050/docs](http://localhost:5050/docs).

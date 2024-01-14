@@ -25,7 +25,7 @@ managed = true
 dev-dependencies = []
 
 [tool.rye.scripts]
-dev = "uvicorn app:server --reload"
+dev = "uvicorn app:server --reload --port 5050"
 test = "pytest"
 
 [tool.hatch.metadata]
