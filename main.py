@@ -1,22 +1,30 @@
-from fastapi import FastAPI
+from starlette.responses import RedirectResponse
+from fastapi import FastAPI, status, HTTPException
 from pydantic import BaseModel
+
 from fastapi.staticfiles import StaticFiles
 
-from utils import calculate
+from utils import calculate, CalculatorError
 
 app = FastAPI(
     title="RPN Calculator",
     description="A simple RPN calculator",
 )
 
-app.mount("/", StaticFiles(directory="resources/dist", html=True), name="static")
+
+app.mount("/calculator", StaticFiles(directory="resources/dist", html=True), name="calculator")
 
 
 class Body(BaseModel):
     expression: str
 
 
-@app.post("/")
+@app.get("/")
+async def redirect():
+    return RedirectResponse(url="/calculator")
+
+
+@app.post("/api/calc")
 async def root(body: Body):
     """
     ## Calculate the result of a Reverse Polish Notation (RPN) expression.
@@ -35,7 +43,19 @@ async def root(body: Body):
         Response:
         { "expression": "3 4 + 5 *", "result": 35 }
     """
-    return {
-        "expression": body.expression,
-        "result": calculate(body.expression),
-    }
+
+    try:
+        return {
+            "expression": body.expression,
+            "result": calculate(body.expression),
+        }
+    except Exception as e:
+        raise HTTPException(
+            detail=str(e),
+            #
+            # Return a 400 Bad Request status code if the error is a CalculatorError,
+            # otherwise return a 500 Internal Server Error status code.
+            status_code=status.HTTP_400_BAD_REQUEST
+            if isinstance(e, CalculatorError)
+            else status.HTTP_500_INTERNAL_SERVER_ERROR,
+        )
