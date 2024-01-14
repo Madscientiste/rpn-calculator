@@ -12,7 +12,9 @@ Reverse Polish notation, also known as Polish postfix notation or simply postfix
 
 I'm using [Rye](https://rye-up.com/), an experimental package management solution created by the author of [Flask](https://flask.palletsprojects.com/en/3.0.x/).
 
-You probably don't have it installed, doing `pip install -r requirements-dev.lock` should be good enough.
+You probably don't have it, doing it the good old way `pip install -r requirements-dev.lock` should be good enough.
+
+Otherwise you can just do `rye sync` to install the dependencies.
 
 #### Running Tests
 
