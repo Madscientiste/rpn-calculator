@@ -41,8 +41,14 @@ async def root(body: Body):
             "result": calculate(expr),
         }
 
-        # Will do the job for now.
-        Operation.create_operation(**response)
+        # Avoid storing the same expression multiple times.
+        # Why storing the same expression multiple times?
+        # NOTE: Maybe return the stored result instead of the calculated one?
+        # probably useless as the calculation is not expensive. But it could be useful if it was.
+        operation = Operation.get_by_expression(expr)
+        if not operation:
+            # Will do the job for now.
+            Operation.create_operation(**response)
 
         return response
     except Exception as e:

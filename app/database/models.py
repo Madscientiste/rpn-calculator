@@ -43,3 +43,15 @@ class Operation(Base):
         with DBSession() as db:
             operations = db.query(cls).all()
             return operations
+
+    @classmethod
+    def get_by_expression(cls, expression: str):
+        """
+        Get an operation by its expression.
+
+        Parameters:
+            expression (str): The mathematical expression.
+        """
+        with DBSession() as db:
+            operation = db.query(cls).filter(cls.expression == expression).first()
+            return operation
