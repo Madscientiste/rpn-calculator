@@ -1,1 +1,1 @@
-from .calc import calculate
+from .calc import calculate, CalculatorError
