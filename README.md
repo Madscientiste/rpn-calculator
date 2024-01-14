@@ -42,5 +42,6 @@ cd resources
 npm i && npm run build
 ```
 
--   Then the app will be available at [http://localhost:5050](http://localhost:5050).
+-   Then the app will be available at [http://localhost:5050/calculator](http://localhost:5050/calculator).
+-   The API will be available at [http://localhost:5050/api](http://localhost:5050/api).
 -   And the docs will be available at [http://localhost:5050/docs](http://localhost:5050/docs).
