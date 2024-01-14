@@ -20,10 +20,16 @@ function App() {
 		const id = setTimeout(async () => {
 			getResult({ expression: e.target.value })
 				.then(async (res) => {
-					const body = await res.json();
+					const body: Result = await res.json();
+
+					if (res.status !== 200) {
+						throw new Error(body.detail);
+					}
+
 					setResult(body);
 				})
 				.catch((err) => {
+					console.log(err.message);
 					setError(err);
 				});
 		}, 300);
