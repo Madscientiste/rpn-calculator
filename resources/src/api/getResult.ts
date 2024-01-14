@@ -5,6 +5,7 @@ export type Payload = {
 export type Result = {
 	expression: string;
 	result: string;
+	detail?: string;
 };
 
 export function getResult(payload: Payload): Promise<Response> {
