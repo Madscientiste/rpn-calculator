@@ -8,7 +8,7 @@ export type Result = {
 };
 
 export function getResult(payload: Payload): Promise<Response> {
-	return fetch("/", {
+	return fetch("/api/calc", {
 		method: "POST",
 		headers: {
 			"Content-Type": "application/json",
