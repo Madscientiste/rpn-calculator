@@ -1,6 +1,7 @@
 import { ChangeEvent, useState } from "react";
 
 import "./App.css";
+import "@mantine/core/styles.css";
 
 import { Result, getResult } from "./api/getResult";
 import { HistoryPanel } from "./components/HistoryPanel";
