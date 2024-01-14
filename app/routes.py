@@ -12,6 +12,11 @@ class Body(BaseModel):
     expression: str
 
 
+@router.get("/health")
+def health():
+    return "Healthy: OK"
+
+
 @router.post("/calc")
 async def root(body: Body):
     """

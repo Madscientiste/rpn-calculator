@@ -15,6 +15,6 @@ app.mount("/calculator", StaticFiles(directory="resources/dist", html=True), nam
 app.include_router(router, prefix="/api")
 
 
-@router.get("/")
+@app.get("/")
 async def redirect():
     return RedirectResponse(url="/calculator")
