@@ -1,8 +1,9 @@
 import { ChangeEvent, useState } from "react";
 
 import "./App.css";
-import { HistoryPanel } from "./components/HistoryPanel";
+
 import { Result, getResult } from "./api/getResult";
+import { HistoryPanel } from "./components/HistoryPanel";
 
 const timeoutTable = new Map<string, number>();
 
