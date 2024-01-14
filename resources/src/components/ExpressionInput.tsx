@@ -1,7 +1,7 @@
 import { ChangeEvent, useState } from "react";
 
-import { ExclamationTriangleIcon } from "@heroicons/react/24/outline";
-import { Alert, Stack, Text, TextInput, ThemeIcon } from "@mantine/core";
+import { DocumentArrowUpIcon, ExclamationTriangleIcon } from "@heroicons/react/24/outline";
+import { Alert, Button, Group, Stack, Text, TextInput, ThemeIcon } from "@mantine/core";
 
 import { Result, getResult } from "../api/getResult";
 
@@ -40,35 +40,49 @@ export function ExpressionInput() {
 	};
 
 	return (
-		<Stack gap={4}>
-			<TextInput
-				style={{ fontFamily: "'Multi', sans-serif" }}
-				onChange={handleInput}
-				error={!!error}
+		<Group align="end" justify="space-between">
+			<Stack style={{ flexGrow: "1" }} gap={4}>
+				<TextInput
+					style={{ fontFamily: "'Multi', sans-serif" }}
+					onChange={handleInput}
+					error={!!error}
+					rightSection={
+						error && (
+							<ThemeIcon size="md" variant="subtle" c="red">
+								<ExclamationTriangleIcon />
+							</ThemeIcon>
+						)
+					}
+					placeholder="5 5 8 * +"
+					label="Expression"
+				/>
+				{result && (
+					<Alert color="indigo.3">
+						<Text c="indigo.9" fw="bolder" size="sm">
+							{result ? result.result : "No result yet"}
+						</Text>
+					</Alert>
+				)}
+				{error && (
+					<Alert color="red">
+						<Text c="red.9" fw="bolder" size="sm">
+							{error.message}
+						</Text>
+					</Alert>
+				)}
+			</Stack>
+
+			<Button
+				component="a"
+				href="/api/export"
 				rightSection={
-					error && (
-						<ThemeIcon size="md" variant="subtle" c="red">
-							<ExclamationTriangleIcon />
-						</ThemeIcon>
-					)
+					<ThemeIcon size="sm" variant="subtle" c="white">
+						<DocumentArrowUpIcon />
+					</ThemeIcon>
 				}
-				placeholder="5 5 8 * +"
-				label="Expression"
-			/>
-			{result && (
-				<Alert color="indigo.3">
-					<Text c="indigo.9" fw="bolder" size="sm">
-						{result ? result.result : "No result yet"}
-					</Text>
-				</Alert>
-			)}
-			{error && (
-				<Alert color="red">
-					<Text c="red.9" fw="bolder" size="sm">
-						{error.message}
-					</Text>
-				</Alert>
-			)}
-		</Stack>
+			>
+				Export History
+			</Button>
+		</Group>
 	);
 }
