@@ -1,5 +1,6 @@
-from fastapi import status, HTTPException, APIRouter
+from fastapi import status, HTTPException, APIRouter, Response
 from pydantic import BaseModel
+from pandas import DataFrame, concat
 
 from .utils import calculate, CalculatorError
 from .models import Operation
@@ -51,3 +52,30 @@ async def root(body: Body):
             if isinstance(e, CalculatorError)
             else status.HTTP_500_INTERNAL_SERVER_ERROR,
         )
+
+
+@router.get("/export")
+async def export():
+    """
+    ## Export all operations to a CSV file.
+
+    This endpoint returns a CSV file with all operations stored in the database.
+    The file is downloaded by the browser.
+
+    **Returns**:
+        file: A CSV file with all operations stored in the database.
+    """
+    operations = Operation.get_operations()
+
+    keys = [col.name for col in Operation.__mapper__.columns if col != "id"]
+    df = DataFrame([], columns=keys)
+
+    for operation in operations:
+        opdf = DataFrame([operation.to_dict()])
+        df = concat([df.astype(opdf.dtypes), opdf.astype(df.dtypes)], ignore_index=True)
+
+    return Response(
+        content=df.to_csv(sep=";", index=False),
+        media_type="text/csv",
+        headers={"Content-Disposition": "attachment; filename=export.csv"},
+    )

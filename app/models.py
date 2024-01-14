@@ -24,6 +24,14 @@ class Operation(Base):
     result = Column(Integer)
     timestamp = Column(DateTime, default=datetime.utcnow)
 
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "expression": self.expression,
+            "result": self.result,
+            "timestamp": self.timestamp,
+        }
+
     @classmethod
     def create_operation(cls, expression: str, result: int):
         """
