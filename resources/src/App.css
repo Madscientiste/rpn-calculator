@@ -11,7 +11,9 @@ body {
 	background-size: var(--size) var(--size);
 	background-color: var(--clr2);
 
-	/* Fade the grids at the end */
 	background-image: linear-gradient(var(--clr1) var(--line-width), transparent 0),
 		linear-gradient(to right, var(--clr1) var(--line-width), var(--clr2) var(--line-width));
+
+	/* overwriting mantine's 100% rule on body */
+	height: auto;
 }
