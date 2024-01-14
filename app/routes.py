@@ -3,7 +3,7 @@ from pydantic import BaseModel
 from pandas import DataFrame, concat
 
 from .utils import calculate, CalculatorError
-from .models import Operation
+from .database import Operation
 
 router = APIRouter()
 

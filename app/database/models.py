@@ -1,19 +1,8 @@
-from sqlalchemy import create_engine, Column, Integer, String, DateTime
-from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.orm import sessionmaker
-
+from sqlalchemy import Column, Integer, String, DateTime
 from datetime import datetime
 
-import pathlib
-
-SQLITE_PATH = pathlib.Path(__file__).parent.parent / "database.sqlite"
-
-Base = declarative_base()
-
-engine = create_engine(f"sqlite:///{SQLITE_PATH}")
-Base.metadata.create_all(bind=engine)
-
-DBSession = sessionmaker(autocommit=False, autoflush=False, bind=engine)
+from .base import Base
+from .session import DBSession
 
 
 class Operation(Base):
