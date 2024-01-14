@@ -1,7 +1,8 @@
 @import url("https://fonts.googleapis.com/css?family=Muli:400,600");
+@import url("https://fonts.googleapis.com/css2?family=Merriweather+Sans:wght@300;400;500;600;700;800&display=swap");
 
 body {
-	--clr1: #f4f5ff;
+	--clr1: #fbfbff;
 	--clr2: #ffffff;
 
 	--line-width: 2px;
