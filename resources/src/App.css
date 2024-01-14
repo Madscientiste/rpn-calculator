@@ -1,72 +1,16 @@
 @import url("https://fonts.googleapis.com/css?family=Muli:400,600");
 
 body {
-	font-family: "Muli", sans-serif;
+	--clr1: #f4f5ff;
+	--clr2: #ffffff;
 
-	background-color: #e5e5f785;
-	opacity: 0.8;
-	background-image: radial-gradient(#444cf7 0.5px, #e5e5f7 0.5px);
-	background-size: 10px 10px;
-}
+	--line-width: 2px;
+	--size: 32px;
 
-:focus {
-	outline: none;
-}
+	background-size: var(--size) var(--size);
+	background-color: var(--clr2);
 
-input[type="text"] {
-	font:
-		15px/24px "Lato",
-		Arial,
-		sans-serif;
-	color: #333;
-	width: 100%;
-	box-sizing: border-box;
-	letter-spacing: 1px;
-
-	border: 0;
-	padding: 5px 12px;
-	border-bottom: 1px solid #ccc;
-}
-
-input[type="text"] ~ .focus-border {
-	position: absolute;
-	bottom: 0;
-	left: 50%;
-	width: 0;
-	height: 2px;
-	background-color: #534caf;
-	transition: 0.4s;
-}
-
-input[type="text"]:focus ~ .focus-border {
-	width: 100%;
-	transition: 0.2s;
-	left: 0;
-}
-
-.inputContainer {
-	float: left;
-	margin: 40px 3%;
-	position: relative;
-}
-
-.container {
-	margin-top: 50px;
-	margin: auto auto;
-
-	max-width: 700px;
-}
-
-.layout {
-	display: grid;
-	grid-template-columns: 1fr 1fr;
-	grid-gap: 20px;
-
-	justify-content: center;
-	/* align-items: center; */
-}
-
-.stack {
-	display: flex;
-	flex-direction: column;
+	/* Fade the grids at the end */
+	background-image: linear-gradient(var(--clr1) var(--line-width), transparent 0),
+		linear-gradient(to right, var(--clr1) var(--line-width), var(--clr2) var(--line-width));
 }
