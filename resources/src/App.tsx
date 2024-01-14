@@ -29,7 +29,6 @@ function App() {
 					setResult(body);
 				})
 				.catch((err) => {
-					console.log(err.message);
 					setError(err);
 				});
 		}, 300);
