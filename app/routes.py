@@ -32,10 +32,13 @@ async def root(body: Body):
         { "expression": "3 4 + 5 *", "result": 35 }
     """
 
+    # cleanup the expression from unnecessary spaces
+    expr = " ".join(body.expression.split())
+
     try:
         response = {
-            "expression": body.expression,
-            "result": calculate(body.expression),
+            "expression": expr,
+            "result": calculate(expr),
         }
 
         # Will do the job for now.
